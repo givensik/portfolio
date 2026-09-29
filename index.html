@@ -84,29 +84,37 @@
     .skill-items { color: #333; }
     .skill-items::before { content: ':'; color: #bbb; margin-right: 6px; }
     .bug-list { list-style: none; margin: 4px 0 5px; }
-    .bug-list li { font-size: 7pt; color: #333; line-height: 1.5; padding: 1.5px 0 1.5px 16px; position: relative; }
+    .bug-list li { font-size: 8pt; color: #333; line-height: 1.5; padding: 1.5px 0 1.5px 16px; position: relative; }
     .bug-list li::before { content: '▸'; position: absolute; left: 4px; color: var(--accent); font-weight: 700; }
     .bug-list li b { color: var(--accent); }
 
-    /* ─── role block ─── */
-    .role-section { margin-bottom: 7px; }
-    .role-section h3 {
-      font-size: 7.8pt;
+    /* ─── role block: ① 섹션 제목 > HOW/WHY/RESULT 라벨 > 본문 ─── */
+    .role-section { margin: 12px 0 4px; }
+    .role-section h3, .block-title {
+      font-size: 9.6pt;
       font-weight: 700;
-      color: #111;
-      border-left: 2.5px solid var(--accent);
-      padding-left: 6px;
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-    .role-section p { font-size: 7.0pt; color: #333; line-height: 1.5; margin-bottom: 2px; }
-    .sub-label {
-      display: inline-block;
-      font-size: 6pt; font-weight: 700; letter-spacing: .1em;
       color: var(--accent);
-      text-transform: uppercase;
-      margin: 7px 0 2px;
+      background: #eef3f8;
+      border-left: 3px solid var(--accent);
+      padding: 3px 8px;
+      margin: 12px 0 7px;
+      line-height: 1.35;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
+    .role-section h3 { margin-top: 0; }
+    .step { display: grid; grid-template-columns: 64px 1fr; margin-bottom: 6px; }
+    .step-label {
+      font-size: 7.6pt; font-weight: 700; letter-spacing: .08em; color: var(--accent);
+      text-transform: uppercase; padding-top: 1px; line-height: 1.3;
+    }
+    .step-label small {
+      display: block; font-size: 6.4pt; font-weight: 500; letter-spacing: 0;
+      color: #888; text-transform: none; margin-top: 2px; word-break: keep-all;
+    }
+    .step-body { border-left: 1px solid #dbe4ee; padding-left: 10px; min-width: 0; }
+    .step-body p { font-size: 8pt; color: #333; line-height: 1.55; margin-bottom: 3px; }
+    .step-body p:last-child { margin-bottom: 0; }
+    pre.code-block .token.comment { color: #5f7a7a; }
 
     /* ─── career timeline ─── */
     .career-tl { width: 100%; border-collapse: collapse; }
@@ -203,16 +211,16 @@
     /* ─── project header ─── */
     .proj-title { font-size: 14pt; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; color: var(--accent); }
     .proj-sub { font-size: 8pt; color: #555; margin-top: 3px; margin-bottom: 6px; }
-    .proj-meta-bar { display: flex; gap: 14px; flex-wrap: wrap; font-size: 7.0pt; color: #777; margin-bottom: 8px; }
+    .proj-meta-bar { display: flex; gap: 14px; flex-wrap: wrap; font-size: 7.8pt; color: #555; margin-bottom: 8px; }
     .proj-meta-bar span strong { color: var(--accent); }
     .proj-overview {
-      font-size: 7.1pt; color: #333; line-height: 1.5;
+      font-size: 8pt; color: #333; line-height: 1.55;
       border-left: 2.5px solid #dbe4ee; padding-left: 10px; margin-bottom: 6px;
     }
 
     /* ─── achieve ─── */
     .alist { list-style: none; margin-top: 5px; }
-    .alist li { font-size: 6.9pt; color: #333; padding: 1.5px 0 1.5px 10px; position: relative; line-height: 1.4; }
+    .alist li { font-size: 8pt; color: #333; padding: 1.5px 0 1.5px 10px; position: relative; line-height: 1.4; }
     .alist li::before { content: '·'; position: absolute; left: 1px; font-weight: 700; color: var(--accent); }
 
     /* ─── code ─── */
@@ -224,11 +232,11 @@
     pre.code-block {
       background: #fdf6e3; border: .5px solid #d4c9a0; border-left: 3px solid var(--accent);
       border-radius: 5px; padding: 6px 9px; margin: 4px 0; overflow: hidden;
-      font-family: 'JetBrains Mono', monospace; font-size: 5.9pt; line-height: 1.4;
+      font-family: 'JetBrains Mono', monospace; font-size: 7pt; line-height: 1.45;
       -webkit-print-color-adjust: exact; print-color-adjust: exact;
     }
-    pre.code-block code { background: none; border: none; border-radius: 0; padding: 0; font-size: 5.9pt; color: inherit; }
-    .code-caption { font-size: 7pt; color: #888; margin-bottom: 3px; font-style: italic; }
+    pre.code-block code { background: none; border: none; border-radius: 0; padding: 0; font-size: 7pt; color: inherit; }
+    .code-caption { font-size: 7.6pt; color: #888; margin-bottom: 3px; font-style: italic; }
 
     @media print {
       pre.code-block { background: #fdf6e3 !important; -webkit-print-color-adjust: exact; }
@@ -602,18 +610,28 @@
 
     <div class="role-section">
       <h3>① 하위 MCP 서버 동적 툴 프록시</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>참조 아키텍처인 <strong><a href="https://github.com/lasso-security/mcp-gateway" target="_blank">Lasso Security 오픈소스 MCP Gateway</a></strong>의 프록시 기능을 일부 수정하여 사용하였다 (플러그인 방식이 LangGraph 기반 DLP 워크플로우와 맞지 않아 MCP SDK 위에 자체 구현). 게이트웨이는 기동 시 하위 서버의 <code>tools/list</code> JSON Schema를 <code>inspect.Parameter</code>로 시그니처 조립해 프록시 툴로 동적 등록하는데, 이 <strong>'JSON Schema → 파이썬 시그니처' 변환에서 두 결함</strong>을 발견했다.</p>
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>참조 아키텍처인 <strong><a href="https://github.com/lasso-security/mcp-gateway" target="_blank">Lasso Security 오픈소스 MCP Gateway</a></strong>의 프록시 기능을 일부 수정하여 사용하였다 (플러그인 방식이 LangGraph 기반 DLP 워크플로우와 맞지 않아 MCP SDK 위에 자체 구현). 게이트웨이는 기동 시 하위 서버의 <code>tools/list</code> JSON Schema를 <code>inspect.Parameter</code>로 시그니처 조립해 프록시 툴로 동적 등록하는데, 이 <strong>'JSON Schema → 파이썬 시그니처' 변환에서 두 결함</strong>을 발견했다.</p>
       <ul class="bug-list">
         <li><b>버그 ①</b> &nbsp;하이픈 든 비식별자 파라미터(<code>Notion-Version</code>)가 <code>isidentifier()</code>에서 <code>ValueError</code> → 툴 등록 누락</li>
         <li><b>버그 ②</b> &nbsp;<code>required</code> 무시로 전부 필수 등록 → optional 파라미터(<code>start_cursor</code>)를 생략 못 해 호출 교착</li>
       </ul>
       <p><b style="color:var(--accent);">해결</b> &nbsp;"내부에선 안전한 이름으로 변형 → 하위 서버 위임 경계에서 원본 복원" 원칙 + required 우선 정렬.</p>
-      <p class="sub-label">Why — 왜 그렇게 설계했는가</p>
-      <p>게이트웨이는 어떤 MCP 서버가 붙어도 동작해야 하므로, 특정 스키마에 하드코딩하지 않고 변환 규칙 자체를 일반화해야 한다. 변형은 내부 구현으로 감추고 경계에서 원본을 복원하면, 상위 에이전트와
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Why<small>왜 그렇게 설계했는가</small></div>
+        <div class="step-body">
+          <p>게이트웨이는 어떤 MCP 서버가 붙어도 동작해야 하므로, 특정 스키마에 하드코딩하지 않고 변환 규칙 자체를 일반화해야 한다. 변형은 내부 구현으로 감추고 경계에서 원본을 복원하면, 상위 에이전트와
         하위 서버 양쪽 모두 원래 스키마를 그대로 본다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>Notion·filesystem 등 하이픈·optional 파라미터가 섞인 실제 MCP 서버를 스키마 손실 없이 프록시할 수 있게 됐다. 나아가 이 두 결함이 <strong>원본 lasso-security mcp-gateway에도 그대로 존재</strong>함을 확인해 <strong>GitHub Issue #19·#20으로 제보</strong>(2026.06)했다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>Notion·filesystem 등 하이픈·optional 파라미터가 섞인 실제 MCP 서버를 스키마 손실 없이 프록시할 수 있게 됐다. 나아가 이 두 결함이 <strong>원본 lasso-security mcp-gateway에도 그대로 존재</strong>함을 확인해 <strong>GitHub Issue #19·#20으로 제보</strong>(2026.06)했다.</p>
       <p class="code-caption">mcp-gateway/mcp_gateway/gateway.py — 스키마 → 시그니처 변환 핵심</p>
       <pre class="code-block"><code class="language-python"># 하이픈 파라미터(Notion-Version)는 isidentifier 실패 → 내부에선 안전한 이름으로 변형
 safe_name = name.replace("-", "_")
@@ -625,19 +643,33 @@ sorted_signatures = sorted(param_signatures, key=lambda x: (not x[3]))
 async def dynamic_tool_impl(*args, **kwargs):
     # 하위 MCP 서버로 위임할 때 원본 파라미터 이름으로 복원
     tool_kwargs = {param_name_mapping.get(k, k): v for k, v in kwargs.items()}</code></pre>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>② OARM Matrix 분류 + DLP workflow 라우팅</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>가로챈 모든 <code>tools/call</code>을 OARM Matrix로 <strong>Broad Read / Atomic Read / Other</strong>로 분류한다. Read 계열(과다 반환 위험)은
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>가로챈 모든 <code>tools/call</code>을 OARM Matrix로 <strong>Broad Read / Atomic Read / Other</strong>로 분류한다. Read 계열(과다 반환 위험)은
         LangGraph workflow(Judge→Filter)로 라우팅해 DLP 검증을 거치게 하고, 그 외(쓰기·기타)는 하위 서버로 직접 위임한다. Matrix는 별도 HTTP API로 분리해 분류표를 런타임에
         조회·수정할 수 있게 했다.</p>
-      <p class="sub-label">Why — 왜 그렇게 설계했는가</p>
-      <p>모든 호출을 LLM Judge로 보내면 지연·비용이 과도하다. 유출 위험이 실재하는 Read 계열만 선별해 검증 파이프라인으로 보내고 나머지는 우회시켜, 가용성을 해치지 않으면서
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Why<small>왜 그렇게 설계했는가</small></div>
+        <div class="step-body">
+          <p>모든 호출을 LLM Judge로 보내면 지연·비용이 과도하다. 유출 위험이 실재하는 Read 계열만 선별해 검증 파이프라인으로 보내고 나머지는 우회시켜, 가용성을 해치지 않으면서
         검증 대상을 좁혔다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>분류 기준이 코드가 아닌 데이터(분류표)로 분리되어, 새 도구가 추가돼도 Gateway 재배포 없이 분류 정책을 갱신할 수 있다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>분류 기준이 코드가 아닌 데이터(분류표)로 분리되어, 새 도구가 추가돼도 Gateway 재배포 없이 분류 정책을 갱신할 수 있다.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -648,39 +680,71 @@ async def dynamic_tool_impl(*args, **kwargs):
 
     <div class="role-section">
       <h3>③ 분산 감사 로그 파이프라인 (turn_id / request_id) + OpenSearch</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>MCP에는 "턴(turn)" 개념이 없어, 같은 사용자 프롬프트에서 파생된 연속 툴 콜을 묶을 식별자가 없다. 시간 윈도우 기반으로 <code>turn_id</code>를 생성하고 개별 호출에
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>MCP에는 "턴(turn)" 개념이 없어, 같은 사용자 프롬프트에서 파생된 연속 툴 콜을 묶을 식별자가 없다. 시간 윈도우 기반으로 <code>turn_id</code>를 생성하고 개별 호출에
         <code>request_id</code>를 부여해, Gateway→Judge→Filter 전 모듈의 로그를 하나의 요청 단위로 연결했다. 로그는 백그라운드 큐로 OpenSearch에 비동기
         적재하며, graceful shutdown과 인덱스 템플릿 자동 등록을 포함한다.</p>
-      <p class="sub-label">Why — 왜 그렇게 설계했는가</p>
-      <p>결합정보 기반 유출은 단일 호출이 아니라 "같은 턴 안에서 누적된 여러 호출"에서 발생하므로, 호출들을 턴 단위로 묶어야 누적 노출 범위를 평가할 수 있다. 적재를 비동기로 분리한 이유는 로그
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Why<small>왜 그렇게 설계했는가</small></div>
+        <div class="step-body">
+          <p>결합정보 기반 유출은 단일 호출이 아니라 "같은 턴 안에서 누적된 여러 호출"에서 발생하므로, 호출들을 턴 단위로 묶어야 누적 노출 범위를 평가할 수 있다. 적재를 비동기로 분리한 이유는 로그
         I/O가 도구 호출 응답 지연으로 이어지지 않게 하기 위함이다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>대시보드에서 하나의 턴이 일으킨 전체 파이프라인 흐름을 추적할 수 있고, 동일 턴 내 이전 호출이 가져간 데이터까지 포함해 over-fetching을 판단할 수 있게 됐다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>대시보드에서 하나의 턴이 일으킨 전체 파이프라인 흐름을 추적할 수 있고, 동일 턴 내 이전 호출이 가져간 데이터까지 포함해 over-fetching을 판단할 수 있게 됐다.</p>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>④ DLP Dashboard — Trace 시각화 + Matrix 편집</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>모듈별 로그 조회와 함께, 턴 단위 파이프라인 흐름(Input → Agent → Gateway → Matrix → Judge → DLP → R')을 <strong>SVG 그래프</strong>로
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>모듈별 로그 조회와 함께, 턴 단위 파이프라인 흐름(Input → Agent → Gateway → Matrix → Judge → DLP → R')을 <strong>SVG 그래프</strong>로
         시각화하는 Trace 탭을 개발했다(반응형). Matrix HTTP API와 연동해 도구 분류표를 화면에서 실시간 편집할 수 있게 했다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>로그 텍스트를 일일이 읽지 않아도 어느 단계에서 무엇이 마스킹·차단됐는지 한눈에 파악되어, 데모와 디버깅 모두에서 검증 효율이 높아졌다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>로그 텍스트를 일일이 읽지 않아도 어느 단계에서 무엇이 마스킹·차단됐는지 한눈에 파악되어, 데모와 디버깅 모두에서 검증 효율이 높아졌다.</p>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>⑤ 트러블슈팅 — LLM 검증 지연으로 인한 MCP 클라이언트 타임아웃</h3>
-      <p class="sub-label">Problem — 무엇이 문제였는가</p>
-      <p>Read 계열 호출은 Judge(LLM)·Filter 검증을 거치기 때문에 응답이 길어졌고, 그 사이 MCP 클라이언트가 응답이 없다고 판단해 <strong>타임아웃</strong>으로 호출을 끊었다.</p>
-      <p class="sub-label">How — 어떻게 해결했는가</p>
-      <p>검증 단계를 줄이거나 설계를 바꾸는 대신 <strong>MCP 프로토콜 공식 문서</strong>를 직접 분석해, 처리 중임을 클라이언트에 알리는 <strong>progress notification</strong>을 검증 동안 전송하도록 구현했다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>DLP 검증 파이프라인을 그대로 유지하면서 타임아웃 없이 도구 호출이 완료되도록 했다.</p>
+      <div class="step">
+        <div class="step-label">Problem<small>무엇이 문제였는가</small></div>
+        <div class="step-body">
+          <p>Read 계열 호출은 Judge(LLM)·Filter 검증을 거치기 때문에 응답이 길어졌고, 그 사이 MCP 클라이언트가 응답이 없다고 판단해 <strong>타임아웃</strong>으로 호출을 끊었다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">How<small>어떻게 해결했는가</small></div>
+        <div class="step-body">
+          <p>검증 단계를 줄이거나 설계를 바꾸는 대신 <strong>MCP 프로토콜 공식 문서</strong>를 직접 분석해, 처리 중임을 클라이언트에 알리는 <strong>progress notification</strong>을 검증 동안 전송하도록 구현했다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>DLP 검증 파이프라인을 그대로 유지하면서 타임아웃 없이 도구 호출이 완료되도록 했다.</p>
+        </div>
+      </div>
     </div>
 
     <hr class="div">
-    <p style="font-size:8.5pt; font-weight:700; margin:10px 0 6px; color:var(--accent);">핵심 성과 — k-익명성 벤치마크</p>
-    <p style="font-size:7.2pt; color:#444; line-height:1.55; margin-bottom:5px;">
+    <p class="block-title">핵심 성과 — k-익명성 벤치마크</p>
+    <p style="font-size:8pt; color:#444; line-height:1.55; margin-bottom:5px;">
       결합정보 기반 재식별에 대한 방어력을 검증하기 위해, 100만 건 합성 페르소나 데이터셋(nvidia/Nemotron-Personas-Korea)으로
       <strong>No Filter / Presidio DLP / CLEAR</strong> 3개 비교군의 k-익명성을 측정하는 벤치마크를 설계·실행했다 (n=500, 총 1,589회 실행).
     </p>
@@ -691,7 +755,7 @@ async def dynamic_tool_impl(*args, **kwargs):
       <li>4개 모듈(Gateway·Judge·Filter·Dashboard)을 Claude Desktop·웹 환경에서 end-to-end 동작시킴 · CISC-S'26 게재 + 정보보호학회장상</li>
     </ul>
 
-    <p style="font-size:8.5pt; font-weight:700; margin:12px 0 6px; color:var(--accent);">기술 스택</p>
+    <p class="block-title">기술 스택</p>
     <div>
       <span class="tag">Python 3.12</span><span class="tag">FastMCP 3.0</span><span class="tag">LangGraph / LangChain</span>
       <span class="tag">Anthropic Claude Sonnet</span><span class="tag">Presidio</span><span class="tag">Aho-Corasick</span>
@@ -719,36 +783,64 @@ async def dynamic_tool_impl(*args, **kwargs):
 
     <div class="role-section">
       <h3>① 현업 인터뷰 기반 요구사항·위협 분석 → 문제 정의</h3>
-      <p class="sub-label">How — 어떻게 했는가</p>
-      <p>정보보호본부 실무진 인터뷰로 외부 데이터가 RAG에 유입되는 <strong>파이프라인 구조(수집 → 전처리 → 임베딩 → 벡터 DB 적재)</strong>를 단계별로 파악하고, 각 단계에 어떤 보안 검증이 적용되는지를 매핑했다. 그 결과 <strong>개인정보(PII) 필터링은 있으나, 임베딩 직전에 악성 프롬프트를 검증하는 단계가 부재</strong>함을 식별하고 이를 핵심 문제로 정의했다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>가상의 위협이 아니라 현업의 실제 운영 파이프라인에 존재하는 공백에서 출발했기에, 이후 솔루션이 실질적 위험을 겨냥하도록 방향을 잡을 수 있었다.</p>
+      <div class="step">
+        <div class="step-label">How<small>어떻게 했는가</small></div>
+        <div class="step-body">
+          <p>정보보호본부 실무진 인터뷰로 외부 데이터가 RAG에 유입되는 <strong>파이프라인 구조(수집 → 전처리 → 임베딩 → 벡터 DB 적재)</strong>를 단계별로 파악하고, 각 단계에 어떤 보안 검증이 적용되는지를 매핑했다. 그 결과 <strong>개인정보(PII) 필터링은 있으나, 임베딩 직전에 악성 프롬프트를 검증하는 단계가 부재</strong>함을 식별하고 이를 핵심 문제로 정의했다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>가상의 위협이 아니라 현업의 실제 운영 파이프라인에 존재하는 공백에서 출발했기에, 이후 솔루션이 실질적 위험을 겨냥하도록 방향을 잡을 수 있었다.</p>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>② ML 기반 악성 프롬프트 탐지 모델 — BERT 임베딩 + Logistic Regression</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>탐지 모델은 세 기준으로 선정했다. ① <strong>다국어</strong> — 프롬프트 인젝션 데이터셋이 대부분 영어라, 타 언어로 학습해도 한국어를 처리할 수 있는 <strong>BERT</strong>
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>탐지 모델은 세 기준으로 선정했다. ① <strong>다국어</strong> — 프롬프트 인젝션 데이터셋이 대부분 영어라, 타 언어로 학습해도 한국어를 처리할 수 있는 <strong>BERT</strong>
         임베딩을 사용. ② <strong>정확성</strong> — ML 4종(Naive Bayes·Logistic Regression·SVM·Random Forest)과 DL 1종(XLM-RoBERTa)을 비교해
         F1이 가장 높은 <strong>Logistic Regression</strong>을 선택. ③ <strong>비용</strong> — 파인튜닝 DL은 성능은 비슷하나 자원·추론시간이 커 실시간 필터에
         부적합하므로 경량 LR 채택.</p>
-      <p class="sub-label">Data — 학습 데이터</p>
-      <p>프롬프트 인젝션: <code>deepset/prompt-injections</code>, <code>rikka-snow/prompt-injection-multilingual</code> · 금융 도메인:
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Data<small>학습 데이터</small></div>
+        <div class="step-body">
+          <p>프롬프트 인젝션: <code>deepset/prompt-injections</code>, <code>rikka-snow/prompt-injection-multilingual</code> · 금융 도메인:
         AI Hub 금융 말뭉치(dataSetSn 71782)를 영·일 번역으로 보강.</p>
-      <p class="sub-label">Result — 성과</p>
-      <p>정상/악성 프롬프트 탐지 시연에 성공하고, 기존 PII DLP의 <strong>간접 프롬프트 인젝션 사각지대를 보완</strong>하는 방어 계층을 제시했다. AI 기본법 제32조(인공지능 안전성
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>성과</small></div>
+        <div class="step-body">
+          <p>정상/악성 프롬프트 탐지 시연에 성공하고, 기존 PII DLP의 <strong>간접 프롬프트 인젝션 사각지대를 보완</strong>하는 방어 계층을 제시했다. AI 기본법 제32조(인공지능 안전성
         확보 의무) 고시 대응 방안까지 도출했다.</p>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>③ Splunk 내부자 이상행위 탐지</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>제로 트러스트 관점에서 각 서버 로그를 기반으로 내부자 이상행위 탐지 시나리오를 설계하고, Splunk 쿼리를 작성해 Dashboard에 반영, 위협을 탐지하도록 구현했다.</p>
-      <p class="sub-label">Result — 어떤 효과가 있었는가</p>
-      <p>SIEM 운영과 탐지 대시보드 구현 경험을 확보하고, 금융권 블루팀의 탐지 체계를 실무 데이터로 이해했다.</p>
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>제로 트러스트 관점에서 각 서버 로그를 기반으로 내부자 이상행위 탐지 시나리오를 설계하고, Splunk 쿼리를 작성해 Dashboard에 반영, 위협을 탐지하도록 구현했다.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Result<small>어떤 효과가 있었는가</small></div>
+        <div class="step-body">
+          <p>SIEM 운영과 탐지 대시보드 구현 경험을 확보하고, 금융권 블루팀의 탐지 체계를 실무 데이터로 이해했다.</p>
+        </div>
+      </div>
     </div>
 
-    <p style="font-size:8.5pt; font-weight:700; margin:12px 0 6px; color:var(--accent);">기술 스택</p>
+    <p class="block-title">기술 스택</p>
     <div>
       <span class="tag">BERT</span><span class="tag">Logistic Regression</span><span class="tag">scikit-learn</span>
       <span class="tag">PyTorch</span><span class="tag">XLM-RoBERTa</span><span class="tag">Splunk (SPL)</span><span class="tag">Express</span>
@@ -777,32 +869,44 @@ async def dynamic_tool_impl(*args, **kwargs):
 
     <div class="role-section">
       <h3>① cross-domain을 가능케 한 데이터 통합·정규화 (핵심 기여)</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>학습은 실제 5G 기반 실측 데이터(<code>V2AIX</code>, 정상만), 평가는 IEEE 802.11p(DSRC) 시뮬레이션 공격 데이터(<code>VeReMi Extension</code>)를
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>학습은 실제 5G 기반 실측 데이터(<code>V2AIX</code>, 정상만), 평가는 IEEE 802.11p(DSRC) 시뮬레이션 공격 데이터(<code>VeReMi Extension</code>)를
         사용했다. 두 데이터셋을 ETSI CAM 스펙 단위로 정규화하고 위/경도를 로컬 미터 좌표로 변환했다. CAM 물리·동역학 정보 중 <strong>13개 피처</strong>를 선정(인접 프레임 위치 변화량 <code>dpos</code> 포함)하고,
         V2AIX 기준 <code>StandardScaler</code>를 VeReMi에 동일 적용해 도메인 분포 이동을 최소화했다.</p>
-      <p class="sub-label">Why — 왜 그렇게 설계했는가</p>
-      <p>두 데이터셋은 무선 기술·수집 환경이 달라 분포가 어긋나므로, <strong>학습 도메인(V2AIX) 기준 표준화 파라미터를 평가 도메인에 고정 적용</strong>해야 평가 시 성능 차이가 도메인 불일치가 아닌
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-label">Why<small>왜 그렇게 설계했는가</small></div>
+        <div class="step-body">
+          <p>두 데이터셋은 무선 기술·수집 환경이 달라 분포가 어긋나므로, <strong>학습 도메인(V2AIX) 기준 표준화 파라미터를 평가 도메인에 고정 적용</strong>해야 평가 시 성능 차이가 도메인 불일치가 아닌
         실제 이상 신호에서 비롯됐다고 말할 수 있다. CAM 형식이 동일하다는 표준적 사실을 정규화로 '실측 가능한 cross-domain 전제'로 바꾼 것이 이 단계의 핵심이다. (평가셋은 라벨이 정교한
         VeReMi Extension을 써, 공격 전 정상 구간까지 공격으로 표시되는 함정을 피했다.)</p>
+        </div>
+      </div>
     </div>
 
     <div class="role-section">
       <h3>② Prediction-AutoEncoder 모델 (예측 기반 비지도)</h3>
-      <p class="sub-label">How — 어떻게 구현했는가</p>
-      <p>재구성이 아니라 <strong>다음 시점을 예측</strong>하도록 학습하는 Prediction-AE를 적용했다 — 시퀀스 L=5, <strong>CAM 13개 피처</strong>를 2-layer LSTM(hidden=128, dropout=0.3)으로
+      <div class="step">
+        <div class="step-label">How<small>어떻게 구현했는가</small></div>
+        <div class="step-body">
+          <p>재구성이 아니라 <strong>다음 시점을 예측</strong>하도록 학습하는 Prediction-AE를 적용했다 — 시퀀스 L=5, <strong>CAM 13개 피처</strong>를 2-layer LSTM(hidden=128, dropout=0.3)으로
         인코딩 후 MLP로 다음 1시점을 예측하고, <strong>예측 오차(MSE)를 이상 점수</strong>로 쓴다. 정상(V2AIX)만으로 학습(Adam, lr=1e-3, batch=128, epoch=50, early stopping)하되,
         <strong>station 단위 80/20 분할</strong>로 동일 차량의 학습–검증 누수를 차단했다. (재구성보다 예측 오차가 시간적 일관성을 직접 모델링해 궤적 변조에 민감)</p>
+        </div>
+      </div>
     </div>
 
-    <p style="font-size:8.5pt; font-weight:700; margin:10px 0 6px; color:var(--accent);">핵심 결과</p>
+    <p class="block-title">핵심 결과</p>
     <ul class="alist">
       <li><strong>cross-domain 유효성 실증</strong> — 5G(V2AIX) 정상으로 학습한 모델이 DSRC(VeReMi) 공격 평가에서 위치·궤적이 비현실적으로 깨지는 공격(Random Position·Data Replay·Traffic Congestion)을 F1 <strong>0.98+</strong>로 탐지 → 무선 기술이 달라도 ETSI CAM 표준을 공유하면 탐지 모델이 그대로 이전됨</li>
       <li>DSRC → 5G → 6G 전환에도 <strong>탐지 모델의 연속성</strong> 확보 가능성 제시 (CAM 표준 유지 시 재학습 없이 확장)</li>
       <li>(보조) 메시지 단위로 약한 공격(DoS·Random Speed)은 차량 단위 집계로 보완 — 예: DoS_random F1 0.010 → 0.843</li>
     </ul>
 
-    <p style="font-size:8.5pt; font-weight:700; margin:12px 0 6px; color:var(--accent);">기술 스택</p>
+    <p class="block-title">기술 스택</p>
     <div>
       <span class="tag">Python</span><span class="tag">PyTorch (LSTM)</span><span class="tag">pandas / numpy</span>
       <span class="tag">scikit-learn</span><span class="tag">V2AIX · VeReMi Extension</span><span class="tag">ETSI CAM</span>
